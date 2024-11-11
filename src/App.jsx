@@ -11,6 +11,17 @@ import { useState } from "react";
 function App() {
   const [items, setItems] = useState(initItems);
 
+  const handleAddItem = (newItemText) => {
+    const newItem = {
+      id: new Date().getTime().toString(),
+      name: newItemText,
+      checked: false,
+    };
+    const newItems = [...items, newItem];
+
+    setItems(newItems);
+  };
+
   return (
     <>
       <BackgroundHeading />
@@ -18,7 +29,7 @@ function App() {
       <main>
         <Header />
         <ItemList items={items} setItems={setItems} />
-        <Sidebar setItems={setItems} />
+        <Sidebar handleAddItem={handleAddItem} />
       </main>
 
       <Footer />

@@ -14,13 +14,7 @@ export default function AddItemForm({ onSubmit }) {
       return;
     }
 
-    const newItem = {
-      id: new Date().getTime().toString(),
-      name: itemText,
-      checked: false,
-    };
-
-    onSubmit(newItem);
+    onSubmit(itemText);
     setItemText("");
     inputRef.current.focus();
   };

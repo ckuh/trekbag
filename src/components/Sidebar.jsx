@@ -1,14 +1,10 @@
 import AddItemForm from "./AddItemForm";
 import ButtonGroup from "./ButtonGroup";
 
-export default function Sidebar({ setItems }) {
+export default function Sidebar({ handleAddItem }) {
   return (
     <div className="sidebar">
-      <AddItemForm
-        onSubmit={(items) => {
-          setItems((prevItems) => [...prevItems, items]);
-        }}
-      />
+      <AddItemForm onSubmit={handleAddItem} />
       <ButtonGroup />
     </div>
   );
