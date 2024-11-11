@@ -22,14 +22,6 @@ function App() {
     setItems(newItems);
   };
 
-  const handleRemoveAllItems = () => {
-    setItems([]);
-  };
-
-  const handleResetToInitial = () => {
-    setItems(initItems);
-  };
-
   const handleMarkAllAsComplete = () => {
     const newItems = items.map((item) => ({
       ...item,
@@ -37,6 +29,23 @@ function App() {
     }));
 
     setItems(newItems);
+  };
+
+  const handleMarkAllAsIncomplete = () => {
+    const newItems = items.map((item) => ({
+      ...item,
+      checked: false,
+    }));
+
+    setItems(newItems);
+  };
+
+  const handleRemoveAllItems = () => {
+    setItems([]);
+  };
+
+  const handleResetToInitial = () => {
+    setItems(initItems);
   };
 
   return (
@@ -49,6 +58,7 @@ function App() {
         <Sidebar
           handleAddItem={handleAddItem}
           handleMarkAllAsComplete={handleMarkAllAsComplete}
+          handleMarkAllAsIncomplete={handleMarkAllAsIncomplete}
           handleRemoveAllItems={handleRemoveAllItems}
           handleResetToInitial={handleResetToInitial}
         />

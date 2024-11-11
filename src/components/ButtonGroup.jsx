@@ -1,16 +1,19 @@
 import Button from "./Button";
 
 export default function ButtonGroup({
+  handleMarkAllAsComplete,
+  handleMarkAllAsIncomplete,
   handleRemoveAllItems,
   handleResetToInitial,
-  handleMarkAllAsComplete,
 }) {
   return (
     <section className="button-group">
       <Button onClick={handleMarkAllAsComplete} type="secondary">
         Mark all as complete
       </Button>
-      <Button type="secondary">Mark all as incomplete</Button>
+      <Button onClick={handleMarkAllAsIncomplete} type="secondary">
+        Mark all as incomplete
+      </Button>
       <Button onClick={handleResetToInitial} type="secondary">
         Reset to initial
       </Button>
