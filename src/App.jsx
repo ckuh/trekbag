@@ -30,6 +30,15 @@ function App() {
     setItems(initItems);
   };
 
+  const handleMarkAllAsComplete = () => {
+    const newItems = items.map((item) => ({
+      ...item,
+      checked: true,
+    }));
+
+    setItems(newItems);
+  };
+
   return (
     <>
       <BackgroundHeading />
@@ -39,6 +48,7 @@ function App() {
         <ItemList items={items} setItems={setItems} />
         <Sidebar
           handleAddItem={handleAddItem}
+          handleMarkAllAsComplete={handleMarkAllAsComplete}
           handleRemoveAllItems={handleRemoveAllItems}
           handleResetToInitial={handleResetToInitial}
         />
