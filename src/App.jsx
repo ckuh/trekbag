@@ -6,10 +6,12 @@ import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [items, setItems] = useState(initItems);
+  const [items, setItems] = useState(
+    () => JSON.parse(localStorage.getItem("items")) || initItems
+  );
 
   const handleAddItem = (newItemText) => {
     const newItem = {
@@ -67,6 +69,11 @@ function App() {
   const handleResetToInitial = () => {
     setItems(initItems);
   };
+
+  useEffect(() => {
+    const json = JSON.stringify(items);
+    localStorage.setItem("items", json);
+  }, [items]);
 
   return (
     <>
