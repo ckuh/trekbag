@@ -9,8 +9,8 @@ export default function ItemList({
         <Item
           key={item.id}
           item={item}
-          handleDeleteItem={handleDeleteItem}
-          handleToggleItem={handleToggleItem}
+          onDeleteItem={handleDeleteItem}
+          onToggleItem={handleToggleItem}
         >
           {item.name}
         </Item>
@@ -19,13 +19,13 @@ export default function ItemList({
   );
 }
 
-function Item({ item, handleDeleteItem, handleToggleItem, children }) {
+function Item({ item, onDeleteItem, onToggleItem, children }) {
   return (
     <li className="item">
       <label>
         <input
           onChange={() => {
-            handleToggleItem(item.id);
+            onToggleItem(item.id);
           }}
           checked={item.checked}
           type="checkbox"
@@ -34,7 +34,7 @@ function Item({ item, handleDeleteItem, handleToggleItem, children }) {
       </label>
       <button
         onClick={() => {
-          handleDeleteItem(item.id);
+          onDeleteItem(item.id);
         }}
       >
         ❌
