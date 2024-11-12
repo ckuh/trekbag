@@ -73,7 +73,10 @@ function App() {
       <BackgroundHeading />
 
       <main>
-        <Header />
+        <Header
+          completedCount={items.filter((i) => i.checked).length}
+          totalCount={items.length}
+        />
         <ItemList
           items={items}
           handleDeleteItem={handleDeleteItem}
