@@ -1,8 +1,8 @@
-export default function ItemList({ items = [] }) {
+export default function ItemList({ items = [], handleDeleteItem }) {
   return (
     <ul>
       {items.map((item) => (
-        <Item key={item.id} checked={item.checked}>
+        <Item key={item.id} item={item} handleDeleteItem={handleDeleteItem}>
           {item.name}
         </Item>
       ))}
@@ -10,14 +10,20 @@ export default function ItemList({ items = [] }) {
   );
 }
 
-function Item({ checked, children }) {
+function Item({ item, handleDeleteItem, children }) {
   return (
     <li className="item">
       <label>
-        <input checked={checked} type="checkbox" />
+        <input checked={item.checked} type="checkbox" />
         {children}
       </label>
-      <button>❌</button>
+      <button
+        onClick={() => {
+          handleDeleteItem(item.id);
+        }}
+      >
+        ❌
+      </button>
     </li>
   );
 }
