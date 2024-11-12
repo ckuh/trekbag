@@ -1,15 +1,54 @@
+import Select from "react-select";
 import EmptyView from "./EmptyView";
+import { useState } from "react";
+
+const sortingOptions = [
+  {
+    value: "default",
+    label: "Sort by default",
+  },
+  {
+    value: "checked",
+    label: "Sort by checked",
+  },
+  {
+    value: "unchecked",
+    label: "Sort by unchecked",
+  },
+];
 
 export default function ItemList({
   items = [],
   handleDeleteItem,
   handleToggleItem,
 }) {
+  const [sortBy, setSortBy] = useState(sortingOptions[0].value);
+  const sortedItems = [...items].sort((a, b) => {
+    if (sortBy === "checked") {
+      return b.checked - a.checked;
+    }
+
+    if (sortBy === "unchecked") {
+      return a.checked - b.checked;
+    }
+
+    return;
+  });
+
   return (
     <ul className="item-list">
       {items.length === 0 && <EmptyView />}
-      {items.length !== 0 &&
-        items.map((item) => (
+      {items.length > 0 ? (
+        <section className="sorting">
+          <Select
+            onChange={(option) => setSortBy(option.value)}
+            defaultValue={sortingOptions[0]}
+            options={sortingOptions}
+          />
+        </section>
+      ) : null}
+      {items.length > 0 &&
+        sortedItems.map((item) => (
           <Item
             key={item.id}
             item={item}
