@@ -1,6 +1,6 @@
 import Select from "react-select";
 import EmptyView from "./EmptyView";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const sortingOptions = [
   {
@@ -23,17 +23,21 @@ export default function ItemList({
   handleToggleItem,
 }) {
   const [sortBy, setSortBy] = useState(sortingOptions[0].value);
-  const sortedItems = [...items].sort((a, b) => {
-    if (sortBy === "checked") {
-      return b.checked - a.checked;
-    }
+  const sortedItems = useMemo(
+    () =>
+      [...items].sort((a, b) => {
+        if (sortBy === "checked") {
+          return b.checked - a.checked;
+        }
 
-    if (sortBy === "unchecked") {
-      return a.checked - b.checked;
-    }
+        if (sortBy === "unchecked") {
+          return a.checked - b.checked;
+        }
 
-    return;
-  });
+        return;
+      }),
+    [items, sortBy]
+  );
 
   return (
     <ul className="item-list">
