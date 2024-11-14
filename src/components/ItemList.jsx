@@ -28,14 +28,20 @@ export default function ItemList() {
     () =>
       [...items].sort((a, b) => {
         if (sortBy === "checked") {
-          return b.checked - a.checked;
+          if (b.checked !== a.checked) {
+            return b.checked - a.checked;
+          }
+          return new Date(b.id) - new Date(a.id);
         }
 
         if (sortBy === "unchecked") {
-          return a.checked - b.checked;
+          if (a.checked !== b.checked) {
+            return a.checked - b.checked;
+          }
+          return new Date(b.id) - new Date(a.id);
         }
 
-        return;
+        return new Date(b.id) - new Date(a.id);
       }),
     [items, sortBy]
   );
